@@ -1,0 +1,47 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Visual Studio folder (cache, indexes)
+.vs/
+
+# ASP.NET Core secrets and environment files
+secrets.json
+appsettings.Development.json
+
+# Entity Framework Migrations snapshot
+Migrations/*Snapshot.cs
+
+# Logs
+*.log
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Rider IDE files
+.idea/
+
+# Resharper files
+_ReSharper*/
+
+# IIS Express folder
+/.vs/
+
+# Published output folder
+publish/
