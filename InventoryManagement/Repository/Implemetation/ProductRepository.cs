@@ -63,5 +63,12 @@ namespace InventoryManagement.Repository.Implemetation
             }
             return await query.ToListAsync();
         }
+        public async Task<IEnumerable<Product>> GetPaginatedProductsAsync(int page, int pageSize)
+        {
+            return await _context.Products
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

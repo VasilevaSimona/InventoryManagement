@@ -80,6 +80,13 @@ namespace InventoryManagement.Controllers
             return Ok(products);
 
         }
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetPaginatedProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        {
+            var products = await _productService.GetPaginatedProductsAsync(page, pageSize);
+
+            return Ok(products);
+        }
     }
 }
 

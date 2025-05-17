@@ -11,5 +11,6 @@ namespace InventoryManagement.Service.Interface
         Task<ProductDTO?> UpdateProductAsync(int id, ProductDTO product);
         Task<bool> DeleteProductAsync(int id);
         Task<IEnumerable<ProductDTO>> SearchProductsAsync(string? name, string? category);
+        Task<IEnumerable<ProductDTO>> GetPaginatedProductsAsync(int page,int pageSize);
     }
 }

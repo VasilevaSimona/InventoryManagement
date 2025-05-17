@@ -10,5 +10,6 @@ namespace InventoryManagement.Repository.Interface
         Task<Product?> UpdateProductAsync(Product product);
         Task<bool> DeleteProductAsync(int id);
         Task<IEnumerable<Product>> SearchProductsAsync(string? name, string? category);
+        Task<IEnumerable<Product>> GetPaginatedProductsAsync(int page, int pageSize);
     }
 }
