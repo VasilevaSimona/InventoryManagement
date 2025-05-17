@@ -1,13 +1,14 @@
-﻿using InventoryManagement.Models;
+﻿using InventoryManagement.DTOs;
+using InventoryManagement.Models;
 
 namespace InventoryManagement.Service.Interface
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetAllProductsAsync();
-        Task<Product?> GetProductByIdAsync(int id);
-        Task<Product> AddProductAsync(Product product);
-        Task<Product?> UpdateProductAsync(Product product);
+        Task<IEnumerable<ProductDTO>> GetAllProductsAsync();
+        Task<ProductDTO?> GetProductByIdAsync(int id);
+        Task<ProductDTO> AddProductAsync(ProductDTO product);
+        Task<ProductDTO?> UpdateProductAsync(int id, ProductDTO product);
         Task<bool> DeleteProductAsync(int id);
     }
 }

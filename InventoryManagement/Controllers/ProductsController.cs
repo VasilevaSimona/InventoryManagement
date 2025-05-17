@@ -3,6 +3,8 @@ using InventoryManagement.Models;
 using InventoryManagement.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using InventoryManagement.DTOs;
 
 namespace InventoryManagement.Controllers
 {
@@ -11,17 +13,20 @@ namespace InventoryManagement.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
             var products = await _productService.GetAllProductsAsync();
-            return Ok(products);
+            var productDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
+            return Ok(productDto);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
@@ -31,27 +36,32 @@ namespace InventoryManagement.Controllers
             {
                 return NotFound();
             }
-            return Ok(product);
+            var productDto = _mapper.Map<ProductDTO>(product);
+            return Ok(productDto);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] Product product)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductDTO productDto)
         {
-            var createdProduct = await _productService.AddProductAsync(product);
-            return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
+            var product = _mapper.Map<Product>(productDto);
+            var createdProduct = await _productService.AddProductAsync(productDto);
+            var createdProductDto = _mapper.Map<ProductDTO>(createdProduct);
+            return CreatedAtAction(nameof(GetProductById), new { id = createdProductDto.Id }, createdProductDto);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product product)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDTO productDto)
         {
-            if (id != product.Id)
+            if (id != productDto.Id)
             {
                 return BadRequest("Product ID mismatch.");
             }
-            var updatedProduct = await _productService.UpdateProductAsync(product);
+            var product = _mapper.Map<Product>(productDto);
+            var updatedProduct = await _productService.UpdateProductAsync(id,productDto);
             if (updatedProduct == null)
             {
                 return NotFound();
             }
-            return Ok(updatedProduct);
+            var updatedProductDto = _mapper.Map<ProductDTO>(updatedProduct);
+            return Ok(updatedProductDto);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
