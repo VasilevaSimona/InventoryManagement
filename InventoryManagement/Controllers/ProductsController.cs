@@ -55,7 +55,7 @@ namespace InventoryManagement.Controllers
                 return BadRequest("Product ID mismatch.");
             }
             var product = _mapper.Map<Product>(productDto);
-            var updatedProduct = await _productService.UpdateProductAsync(id,productDto);
+            var updatedProduct = await _productService.UpdateProductAsync(id, productDto);
             if (updatedProduct == null)
             {
                 return NotFound();
@@ -73,7 +73,13 @@ namespace InventoryManagement.Controllers
             }
             return NoContent();
         }
-        
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string? name, [FromQuery] string? category)
+        {
+            var products = await _productService.SearchProductsAsync(name, category);
+            return Ok(products);
+
+        }
     }
 }
 

@@ -42,5 +42,10 @@ namespace InventoryManagement.Service.Implementation
         {
             return await _productRepository.DeleteProductAsync(id);
         }
+        public async Task<IEnumerable<ProductDTO>> SearchProductsAsync(string? name, string? category)
+        {
+            var products = await _productRepository.SearchProductsAsync(name, category);
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
+        }
     }
 }

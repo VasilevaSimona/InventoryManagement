@@ -50,5 +50,18 @@ namespace InventoryManagement.Repository.Implemetation
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<IEnumerable<Product>> SearchProductsAsync(string? name, string? category)
+        {
+            var query = _context.Products.AsQueryable();
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(p => p.Name.Contains(name));
+            }
+            if (!string.IsNullOrEmpty(category))
+            {
+                query = query.Where(p => p.Category.Contains(category));
+            }
+            return await query.ToListAsync();
+        }
     }
 }
