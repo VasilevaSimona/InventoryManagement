@@ -1,21 +1,42 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!  
-</h1>
-@if(product$ | async; as product){
-  @if(product.length>0){
-    @for (item of product; track $index){
-      <p>{{item.name}}</p>
-      <p>{{item.price}}</p>
-      <p>{{item.description}}</p>
-      <p>{{item.category}}</p>
-    }
+<div class="container">
+  <h1 class="title"> Products</h1>
 
-  }@else{
-    <p>No products found</p>
-  }
+  <div *ngIf="products$ | async as products; else loading" class="table-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>{{ product.category }}</td>
+          <td>
+            
+              <button class="edit-btn" (click)="onEdit(product)"> Edit</button>
+              <button class="delete-btn" (click)="onDelete(product.id)">Delete</button>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-}
-<!-- app.component.html -->
+  <ng-template #loading>
+    <p>Loading products...</p>
+  </ng-template>
 
+  <button class="add-btn" (click)="onAdd()">➕ Add Product</button>
 
-<!-- app.component.html -->
+  <div class="form-wrapper" *ngIf="showForm">
+    <app-product-form
+      [product]="selectedProduct"
+      (saved)="onFormSaved()">
+    </app-product-form>
+  </div>
+</div>

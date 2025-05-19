@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="form-group">
+    <label>Name:</label>
+    <input formControlName="name" />
+    <div *ngIf="form.controls.name.invalid && form.controls.name.touched">
+      Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Price:</label>
+    <input type="number" formControlName="price" />
+    <div *ngIf="form.controls.price.invalid && form.controls.price.touched">
+      Price is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Description:</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Category:</label>
+    <input formControlName="category" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid" class="add-btn"> Save</button>
+</form>
