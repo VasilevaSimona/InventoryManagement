@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inventory Management System - README</title>
-</head>
-<body>
-  <div class="container">
+
+<title>Inventory Management System - README</title>
+
     <h1>Inventory Management System</h1>
 
     <h2>Overview</h2>
@@ -96,7 +90,3 @@
     <p>After starting both backend and frontend servers, you can use the Angular app to manage products via the user interface.</p>
     <p>Alternatively, you can test backend API endpoints directly using the Swagger UI.</p>
 
-    
-  </div>
-</body>
-</html>
