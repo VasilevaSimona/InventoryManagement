@@ -69,7 +69,7 @@ https://localhost:44324/swagger/index.html
 ### Navigate to the frontend project folder:
 
 ```bash
-cd InventoryManagementFrontend
+cd InventoryManagement-frontend
 ```
 Install frontend dependencies:
 
