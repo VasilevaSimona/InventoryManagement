@@ -1,0 +1,21 @@
+<h1 class="text-3xl font-bold underline">
+  Hello world!  
+</h1>
+@if(product$ | async; as product){
+  @if(product.length>0){
+    @for (item of product; track $index){
+      <p>{{item.name}}</p>
+      <p>{{item.price}}</p>
+      <p>{{item.description}}</p>
+      <p>{{item.category}}</p>
+    }
+
+  }@else{
+    <p>No products found</p>
+  }
+
+}
+<!-- app.component.html -->
+
+
+<!-- app.component.html -->
